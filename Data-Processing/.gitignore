@@ -1,0 +1,31 @@
+# Compiled class files
+*.class
+*.log
+
+# Scala caches
+*.cache
+*.iml
+*.swp
+
+# Target directory
+/target/
+/out/
+
+# Build tools output
+/.bloop/
+/.metals/
+/.project
+/.idea/
+/.idea_modules/
+/.vscode/
+
+# SBT-specific files
+*.lock
+/.history/
+/.idea_modules/
+/.idea/
+/.metals/
+/bloop/
+/.idea/
+/.class
+log/
