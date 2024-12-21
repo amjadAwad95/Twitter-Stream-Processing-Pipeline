@@ -28,4 +28,11 @@ object KafkaConsumer {
 
     dataWithTimeStamp
   }
+  def writeStream(df: DataFrame): Unit = {
+      val query = df.writeStream
+        .outputMode("append") // Use "append" or "update" based on requirements
+        .format("console") // Output format
+        .start()
+        query.awaitTermination()
+  }
 }

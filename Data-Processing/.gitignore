@@ -11,6 +11,10 @@
 /target/
 /out/
 
+#testing if dataProcessing works
+/output/
+/data/
+
 # Build tools output
 /.bloop/
 /.metals/

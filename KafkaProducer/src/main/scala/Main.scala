@@ -54,7 +54,7 @@ object Main {
         })
         Thread.sleep(3000)
       })
-
+    println("finished")
     producer.close()
   }
 }
