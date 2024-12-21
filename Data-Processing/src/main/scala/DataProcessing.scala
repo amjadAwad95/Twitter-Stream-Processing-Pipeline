@@ -1,12 +1,12 @@
 import org.apache.log4j.BasicConfigurator
 import org.apache.log4j.varia.NullAppender
-import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types._
 
 
 object DataProcessing {
-  def dataProcessing(): Unit = {
+  def dataProcessing(): DataFrame = {
     val nullAppender = new NullAppender
     BasicConfigurator.configure(nullAppender)
     val spark = SparkSession.builder()
@@ -53,12 +53,7 @@ object DataProcessing {
         $"geo_coordinates",
         $"user"
       )
-  val query = transformedDF.writeStream
-    .outputMode("append") // Use "append" or "update" based on requirements
-    .format("json") // Output format
-    .option("path", "output/json") // Directory where JSON files will be written
-    .option("checkpointLocation", "output/checkpoint") // Directory for storing metadata (gives error if not there)
-    .start()
-    query.awaitTermination()
+    transformedDF
+
   }
 }

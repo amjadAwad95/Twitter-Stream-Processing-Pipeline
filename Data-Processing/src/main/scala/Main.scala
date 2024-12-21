@@ -1,5 +1,6 @@
 object Main {
   def main(args: Array[String]): Unit = {
-    DataProcessing.dataProcessing()
+    val df = DataProcessing.dataProcessing()
+    KafkaConsumer.writeStream(df)
   }
 }
