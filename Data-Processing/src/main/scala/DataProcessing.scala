@@ -53,7 +53,7 @@ object DataProcessing {
         $"geo_coordinates",
         $"user"
       )
-    transformedDF
 
+   transformedDF
   }
 }
