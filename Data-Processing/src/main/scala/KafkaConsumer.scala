@@ -1,22 +1,9 @@
-import org.apache.spark.sql.{SparkSession, DataFrame}
-import org.apache.log4j.BasicConfigurator
-import org.apache.log4j.varia.NullAppender
+import org.apache.spark.sql.{DataFrame, Dataset, SparkSession}
 import org.apache.spark.sql.functions.current_timestamp
-
-
+import org.apache.spark.sql.Row
 
 object KafkaConsumer {
-  def startKafkaConsumer(): DataFrame = {
-    val nullAppender = new NullAppender
-    BasicConfigurator.configure(nullAppender)
-
-    val spark = SparkSession.builder()
-      .appName("KafkaConsumer")
-      .master("local")
-      .getOrCreate()
-
-
-
+  def startKafkaConsumer(spark: SparkSession): DataFrame = {
     val kafkaDF = spark.readStream
       .format("kafka")
       .option("kafka.bootstrap.servers", "localhost:9092")
@@ -29,10 +16,29 @@ object KafkaConsumer {
     dataWithTimeStamp
   }
   def writeStream(df: DataFrame): Unit = {
-      val query = df.writeStream
-        .outputMode("append") // Use "append" or "update" based on requirements
-        .format("console") // Output format
-        .start()
-        query.awaitTermination()
+    val query = df.writeStream
+      .outputMode("append")
+      .format("console")
+      .option("truncate", "false")
+      .start()
+    query.awaitTermination()
+  }
+
+  def writeStreamElasticSearch(df: DataFrame): Unit = {
+    df.writeStream
+      .foreachBatch { (batchDF: Dataset[Row], batchId: Long) ⇒
+        {
+          batchDF.write
+            .format("org.elasticsearch.spark.sql")
+            .option("checkpointLocation", "checkpoint1")
+            .option("es.resource", "tweets")
+            .mode("append")
+            .save()
+        }
+      }
+      .option("checkpointLocation", "checkpoint1")
+      .outputMode("append")
+      .start()
+      .awaitTermination()
   }
 }
