@@ -9,12 +9,9 @@ lazy val root = (project in file("."))
 
 libraryDependencies += "org.apache.spark" %% "spark-core" % "3.5.3"
 libraryDependencies += "org.apache.spark" %% "spark-sql" % "3.5.3"
-libraryDependencies +="org.apache.spark" %% "spark-sql-kafka-0-10" % "3.5.3"
+libraryDependencies += "org.apache.spark" %% "spark-sql-kafka-0-10" % "3.5.3"
 libraryDependencies += "org.tensorflow" % "tensorflow-core-platform" % "0.3.3"
 libraryDependencies += "edu.stanford.nlp" % "stanford-corenlp" % "4.5.7"
 libraryDependencies += "edu.stanford.nlp" % "stanford-corenlp" % "4.5.7" classifier "models"
-
-
-
-
+libraryDependencies += "org.elasticsearch" %% "elasticsearch-spark-30" % "8.16.0"
 
