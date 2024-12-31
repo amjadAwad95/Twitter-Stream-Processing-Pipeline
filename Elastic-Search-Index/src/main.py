@@ -47,7 +47,8 @@ def index_settings_constructor():
                         "location": {"type": "text"},
                     }
                 },
-                "sentiments": {"type": "keyword"},
+                "sentiment_label": {"type": "keyword"},
+                "sentiment_score": {"type": "double"},
             }
         },
     }
