@@ -29,11 +29,11 @@ object KafkaConsumer {
       .foreachBatch { (batchDF: Dataset[Row], batchId: Long) ⇒
         {
           batchDF.write
-            .format("org.elasticsearch.spark.sql")
-            .option("checkpointLocation", "checkpoint1")
-            .option("es.resource", "tweets")
-            .mode("append")
-            .save()
+          .format("org.elasticsearch.spark.sql")
+          .option("checkpointLocation", "checkpoint1")
+          .option("es.resource", "tweets")
+          .mode("append")
+          .save()
         }
       }
       .option("checkpointLocation", "checkpoint1")
