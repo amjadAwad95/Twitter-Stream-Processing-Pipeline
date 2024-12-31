@@ -8,15 +8,14 @@ import java.util.Properties
 import scala.collection.JavaConverters._
 
 object SentimentAnalysis {
-
   def getSentiments(df: DataFrame): DataFrame = {
 
     // CoreNLP pipeline properties
     val props = new Properties()
-    props.setProperty("annotators", "tokenize,ssplit,parse,sentiment")
+    props.setProperty("annotators", "tokenize, pos, parse, sentiment")
 
     // udf to compute sentiments for each text
-    val computeSentiments = udf((text: String) => {
+    val computeSentimentScore = udf((text: String) => {
 
       val pipeline = new StanfordCoreNLP(props)
       val annotation = new Annotation(text)
@@ -29,19 +28,25 @@ object SentimentAnalysis {
         .toList
 
       // collecting sentiments into a set for each tweet
-      sentenceList.map { sentence =>
+      val scores = sentenceList.map { sentence =>
         val tree = sentence.get(classOf[SentimentCoreAnnotations.SentimentAnnotatedTree])
-        val score = RNNCoreAnnotations.getPredictedClass(tree)
-        score match {
-          case 0 => "Very Negative"
-          case 1 => "Negative"
-          case 2 => "Neutral"
-          case 3 => "Positive"
-          case 4 => "Very Positive"
-        }
-      }.toSet
+        RNNCoreAnnotations.getPredictedClass(tree) // numeric score
+      }
+      if (scores.nonEmpty) Math.round(scores.sum/scores.size) else 2
     })
 
-    df.withColumn("sentiments", computeSentiments(df("text")))
+    val getLabel = udf((score : Int) => {
+      score match {
+        case 0 => "Very Negative"
+        case 1 => "Negative"
+        case 2 => "Neutral"
+        case 3 => "Positive"
+        case 4 => "Very Positive"
+        case _ => "Neutral"
+      }
+    })
+
+    val modifiedDf = df.withColumn("sentiment_score", computeSentimentScore(df("text")))
+    modifiedDf.withColumn("sentiment_label", getLabel(modifiedDf("sentiment_score")))
   }
 }

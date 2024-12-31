@@ -27,7 +27,7 @@ object Main {
 
     val df = DataProcessing.dataProcessing(spark)
     val dfWithSentiments = SentimentAnalysis.getSentiments(df)
-//    KafkaConsumer.writeStream(dfWithSentiments)
+    //KafkaConsumer.writeStream(dfWithSentiments)
     KafkaConsumer.writeStreamElasticSearch(dfWithSentiments)
   }
 }
