@@ -93,8 +93,8 @@ cd Elastic-Search-Index\src
 python main.py
 ```
 
-To Start the Producer go to the scala folder named Kafka Producer and run the Main.scala
-To Start the consumer go to the scala folder Kafka Consumer and run the Main.scala
+- To Start the Producer go to the scala folder named Kafka Producer and run the Main.scala
+- To Start the consumer go to the scala folder Kafka Consumer and run the Main.scala
 
 To visualize data go to http://localhost:5601 then follow these steps:
 On their local Kibana instance:
