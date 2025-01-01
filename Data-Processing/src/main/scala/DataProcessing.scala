@@ -33,7 +33,7 @@ object DataProcessing {
       .withColumn(
         "hashtags",
         expr("transform(entities.hashtags, h -> h.text)")
-      ) // Extract hashtag texts
+      )
       .withColumn(
         "created_at",
         when(

@@ -14,7 +14,7 @@
 #testing if dataProcessing works
 /output/
 /data/
-
+/checkpoint1/
 # Build tools output
 /.bloop/
 /.metals/
