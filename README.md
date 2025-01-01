@@ -120,7 +120,6 @@ A[Data Ingestion] -->|Tweets| B[Kafka Topic]
 B --> C[Data Processing]
 C --> D[Sentiment Analysis]
 D --> F[Elasticsearch Storage]
-E --> F
 F --> G[Visualization in Kibana]
 ```
 
