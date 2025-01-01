@@ -63,26 +63,49 @@ pip install elasticsearch dotenv
 
 3. Start Kafka
 
+Open the root directory where you installed kafka, then run the following commands:
+
+- In linux and mac
+
+```bash
+bin/zookeeper-server-start.sh config/zookeeper.properties
+bin/kafka-server-start.sh config/server.properties
+```
+
 - In windows
 
 ```bash
-cd C:\kafka_2.12-3.8.1\bin\windows
-.\zookeeper-server-start.bat ..\..\config\zookeeper.properties
-.\kafka-server-start.bat ..\..\config\server.properties
+bin\windows\zookeeper-server-start.bat config\zookeeper.properties
+bin\windows\kafka-server-start.bat config\server.properties
 ```
 
 4. Start elastic search and kibana
 
+Open the root directory where you installed elasticsearch, then run the following command:
+
+- In linux and mac
+
+```bash
+bin/elasticsearch
+```
+
 - In windows
 
 ```bash
-cd C:\elasticsearch\elasticsearch-8.16.1\bin
-.\elasticsearch.bat
+bin\elasticsearch.bat
 ```
+Then open the root directory where you installed kibana, then run the following command:
+
+- In linux and mac
 
 ```bash
-cd C:\elasticsearch\kibana-8.16.1\bin
-.\kibana.bat
+bin/kibana
+```
+
+- In windows
+
+```bash
+bin\kibana.bat
 ```
 
 5. Run the pipeline:
@@ -96,14 +119,13 @@ python main.py
 - To Start the Producer go to the scala folder named Kafka Producer and run the Main.scala
 - To Start the consumer go to the scala folder Kafka Consumer and run the Main.scala
 
-To visualize data go to http://localhost:5601 then follow these steps:
-On their local Kibana instance:
+To visualize data go to http://localhost:5601 then follow these steps on your local Kibana instance:
 1. Go to the Management tab.
 2. Navigate to Saved Objects.
 3. Click the Import button.
-4. Upload the .ndjson file you shared.
+4. Upload the .ndjson file, you can find it in `KibanaDashboard` directory.
 
-## TechnologiesUsed
+## Technologies Used
 
 - Stream Processing: Kafka
 - Data Storage: Elasticsearch
