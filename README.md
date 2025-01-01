@@ -112,16 +112,34 @@ On their local Kibana instance:
 
 ## Pipeline
 
+### Pipeline Overview
+
 ```mermaid
 graph LR
 A[Data Ingestion] -->|Tweets| B[Kafka Topic]
 B --> C[Data Processing]
 C --> D[Sentiment Analysis]
-C --> E[Hashtag Analysis]
 D --> F[Elasticsearch Storage]
 E --> F
 F --> G[Visualization in Kibana]
 ```
+
+### Pipeline Stages 
+
+1. **Data Ingestion**  
+   - Tweets are fetched in real-time using Kafka.  
+   - Data is pushed to a Kafka topic named `tweets-stream`.
+
+2. **Data Processing**
+   - Extract the important features from the data.
+   - Scala scripts perform sentiment analysis.  
+   - Machine learning models classify tweet text into sentiment categories.
+
+3. **Data Storage**  
+   - Processed data is stored in Elasticsearch for querying.
+
+4. **Data Visualization**  
+   - Kibana dashboards visualize sentiment trends, top hashtags, and tweet statistics.
 
 ## Contributing
 
