@@ -8,7 +8,7 @@ A scalable and real-time data pipeline for processing, analyzing, and visualizin
 - [Overview](#Overview)
 - [Features](#Features)
 - [Installation](#Installation)
-- [Technologies Used](#Technologies Used)
+- [Technologies Used](#TechnologiesUsed)
 - [Pipeline](#Pipeline)
 - [Contributing](#Contributing)
 
@@ -103,7 +103,7 @@ On their local Kibana instance:
 3. Click the Import button.
 4. Upload the .ndjson file you shared.
 
-## Technologies Used
+## TechnologiesUsed
 
 - Stream Processing: Kafka
 - Data Storage: Elasticsearch
