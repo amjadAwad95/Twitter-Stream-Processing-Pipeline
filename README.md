@@ -112,6 +112,17 @@ On their local Kibana instance:
 
 ## Pipeline
 
+```mermaid
+graph LR
+A[Data Ingestion] -->|Tweets| B[Kafka Topic]
+B --> C[Data Processing]
+C --> D[Sentiment Analysis]
+C --> E[Hashtag Analysis]
+D --> F[Elasticsearch Storage]
+E --> F
+F --> G[Visualization in Kibana]
+```
+
 ## Contributing
 
 We welcome contributions! Follow these steps:
